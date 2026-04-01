@@ -1,0 +1,83 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  tags: string[];
+  coverImage: string;
+  liveUrl?: string;
+  repoUrl?: string;
+  wip?: boolean;
+}
+
+const { title, subtitle, tags, coverImage, liveUrl, repoUrl, wip } = Astro.props;
+---
+<BaseLayout title={`${title} — Paolo Pontarollo`}>
+  <div class="py-8">
+    <a
+      href="/#progetti"
+      class="inline-flex items-center gap-2 text-sm text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors mb-8"
+    >
+      ← Back
+    </a>
+
+    <img
+      src={coverImage}
+      alt={`Cover image for ${title}`}
+      class="w-full h-64 md:h-80 object-cover rounded-lg border border-[var(--color-border)] mb-8"
+    />
+
+    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
+      <div>
+        <div class="flex items-center gap-3 mb-1">
+          <h1 class="text-3xl md:text-4xl font-bold">{title}</h1>
+          {wip && (
+            <span class="text-xs font-mono px-2 py-0.5 border border-[var(--color-accent)] text-[var(--color-accent)] rounded">
+              WIP
+            </span>
+          )}
+        </div>
+        <p class="text-[var(--color-muted)] text-lg">{subtitle}</p>
+      </div>
+
+      <div class="flex flex-col items-start md:items-end gap-3 shrink-0">
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span class="text-xs font-mono px-2 py-0.5 border border-[var(--color-border)] text-[var(--color-muted)] rounded">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div class="flex gap-3">
+          {liveUrl && (
+            <a
+              href={liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm border border-[var(--color-accent)] text-[var(--color-accent)] px-3 py-1 rounded hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors"
+            >
+              ↗ Live
+            </a>
+          )}
+          {repoUrl && (
+            <a
+              href={repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm border border-[var(--color-border)] text-[var(--color-muted)] px-3 py-1 rounded hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+            >
+              ↗ GitHub
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-[var(--color-border)] mb-8" />
+
+    <div class="prose prose-invert max-w-none">
+      <slot />
+    </div>
+  </div>
+</BaseLayout>
