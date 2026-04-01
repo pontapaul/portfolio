@@ -1,0 +1,11 @@
+services:
+  portfolio:
+    build: .
+    container_name: pontapaul-portfolio
+    restart: unless-stopped
+    networks:
+      - npm-nw
+
+networks:
+  npm-nw:
+    external: true
