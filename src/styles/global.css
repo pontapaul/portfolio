@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg:      #111111;
+  --color-surface: #1a1a1a;
+  --color-border:  #2a2a2a;
+  --color-text:    #f0f0f0;
+  --color-muted:   #a3a3a3;
+  --color-accent:  #38bdf8;
+  --font-sans: 'Space Grotesk', sans-serif;
+}
+
+:root {
+  --color-bg:      #111111;
+  --color-text:    #f0f0f0;
+  --color-muted:   #a3a3a3;
+  --color-accent:  #38bdf8;
+  --color-border:  #2a2a2a;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Subtle grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
