@@ -1,0 +1,5 @@
+---
+import fs from 'node:fs';
+const ascii = fs.readFileSync('./src/data/ascii-portrait.txt', 'utf-8');
+---
+<pre class="text-accent font-mono leading-none text-[0.4rem] sm:text-[0.5rem] select-none" aria-hidden="true">{ascii}</pre>

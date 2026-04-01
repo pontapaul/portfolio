@@ -1,19 +1,53 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ProjectPreview from '../components/ProjectPreview.astro';
+import { projects } from '../data/projects.ts';
+
+const featured = projects.filter(p => p.featured);
+const minor = projects.filter(p => !p.featured);
 ---
 <BaseLayout title="Paolo Pontarollo — Full Stack Developer">
-  <section class="py-12">
-    <p class="text-[var(--color-muted)] mb-2 text-sm uppercase tracking-widest">Ciao, sono</p>
-    <h1 class="text-5xl font-bold mb-4 leading-tight">
-      Paolo<br /><span class="text-[var(--color-accent)]">Pontarollo</span>
-    </h1>
-    <p class="text-[var(--color-muted)] text-lg max-w-xl">
-      Full Stack Developer — Laravel, Vue.js, TypeScript. Basato a Bassano del Grappa.
-    </p>
+  <HeroSection />
+
+  <!-- Featured projects -->
+  <section class="mt-16">
+    <h2 class="text-muted text-sm font-mono uppercase tracking-widest mb-8">Progetti</h2>
+    {featured.map(p => (
+      <ProjectPreview
+        slug={p.slug}
+        title={p.title}
+        subtitle={p.subtitle}
+        tags={p.tags}
+        coverImage={p.coverImage ?? ''}
+        wip={p.wip}
+      />
+    ))}
   </section>
 
-  <section class="mt-12">
-    <h2 class="text-2xl font-bold mb-6">Progetti</h2>
-    <p class="text-[var(--color-muted)]">In arrivo...</p>
-  </section>
+  <!-- Minor projects -->
+  {minor.length > 0 && (
+    <section class="mt-4">
+      <p class="text-muted text-xs font-mono uppercase tracking-widest mb-4">Altri progetti</p>
+      <ul>
+        {minor.map(p => (
+          <li class="flex justify-between items-center py-3 border-b border-border group">
+            <span>
+              <span class="text-text font-medium group-hover:text-accent transition-colors">{p.title}</span>
+              <span class="text-muted text-sm font-mono"> · {p.tags.join(' · ')}</span>
+            </span>
+            <span class="flex gap-3 items-center">
+              {p.wip && <span class="text-xs text-accent border border-accent/30 px-2 py-0.5 rounded">WIP</span>}
+              {p.repoUrl && (
+                <a href={p.repoUrl} target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition-colors text-sm">↗ GitHub</a>
+              )}
+              {p.liveUrl && (
+                <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition-colors text-sm">↗ Live</a>
+              )}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 </BaseLayout>

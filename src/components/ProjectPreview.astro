@@ -1,0 +1,45 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  subtitle: string;
+  tags: string[];
+  coverImage: string;
+  wip?: boolean;
+}
+
+const { slug, title, subtitle, tags, coverImage, wip } = Astro.props;
+---
+<a href={`/projects/${slug}`} class="group block border-b border-border py-8">
+  <div class="relative flex flex-col md:flex-row md:items-center gap-6">
+    <!-- Left: meta + title -->
+    <div class="flex-1 min-w-0">
+      <div class="flex flex-wrap gap-2 mb-4">
+        {tags.map(tag => (
+          <span class="text-xs font-mono text-accent border border-accent/30 px-2 py-0.5 rounded">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <h3 class="text-3xl md:text-4xl font-bold text-text group-hover:text-accent transition-colors flex items-center gap-3">
+        {title}
+        {wip && (
+          <span class="text-sm font-mono text-accent border border-accent/30 px-2 py-0.5 rounded align-middle">WIP</span>
+        )}
+      </h3>
+      <p class="text-muted mt-2 text-base">{subtitle}</p>
+    </div>
+
+    <!-- Right: cover image -->
+    {coverImage && (
+      <div class="md:w-1/2 aspect-video overflow-hidden rounded-lg">
+        <img
+          src={coverImage}
+          alt={title}
+          class="w-full h-full object-cover group-hover:scale-105 group-hover:brightness-110 transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
+    )}
+  </div>
+</a>
