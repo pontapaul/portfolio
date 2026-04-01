@@ -1,0 +1,58 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+---
+<ProjectLayout
+  title="TSC Green Volley"
+  subtitle="Gestionale per torneo di beach volley"
+  tags={["Laravel", "Vue 3", "Framework7", "MySQL"]}
+  coverImage="/assets/projects/tsc-green-volley/cover.png"
+  liveUrl="https://tscgreenvolley.it"
+  repoUrl="https://github.com/pontapaul/tsc"
+>
+  <section class="space-y-8">
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">Contesto</h2>
+      <p class="text-[var(--color-text)] leading-relaxed">
+        Torneo estivo di beach e indoor volley organizzato a Galliera Veneta (PD), edizione giugno 2025.
+        Un evento che coinvolge decine di squadre e centinaia di atleti nel corso di una giornata intensa.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">Problema</h2>
+      <p class="text-[var(--color-text)] leading-relaxed">
+        Gestire manualmente iscrizioni, gironi, tabelloni ad eliminazione, classifiche e risultati in tempo reale
+        è caotico e soggetto a errori. Fogli Excel e carta non scalano quando ci sono più campi attivi in parallelo
+        e il pubblico vuole seguire i risultati live.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">Soluzione</h2>
+      <p class="text-[var(--color-text)] leading-relaxed">
+        Applicazione web full-stack custom con due facce: un pannello admin per gli organizzatori
+        (inserimento squadre, generazione gironi, aggiornamento risultati) e un frontend mobile-first
+        accessibile a tutti per seguire classifiche e tabelloni in tempo reale.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">Stack</h2>
+      <ul class="space-y-1 text-[var(--color-text)]">
+        <li><span class="text-[var(--color-muted)] font-mono text-sm">Backend</span> — Laravel 12, API REST con autenticazione Sanctum</li>
+        <li><span class="text-[var(--color-muted)] font-mono text-sm">Frontend</span> — Vue 3 + Framework7 per un look mobile-first nativo</li>
+        <li><span class="text-[var(--color-muted)] font-mono text-sm">Database</span> — MySQL + Redis per aggiornamenti live</li>
+        <li><span class="text-[var(--color-muted)] font-mono text-sm">Infrastruttura</span> — Docker via Laravel Sail</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">Note personali</h2>
+      <p class="text-[var(--color-text)] leading-relaxed">
+        Questo progetto nasce dalla doppia passione per la pallavolo e il codice.
+        Costruito da zero in poche settimane, tra allenamenti e weekend liberi — uno di quei progetti
+        dove la motivazione non manca mai perché sai esattamente chi lo userà e perché.
+      </p>
+    </div>
+  </section>
+</ProjectLayout>
