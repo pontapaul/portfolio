@@ -1,0 +1,10 @@
+---
+interface Props {
+  skill: string;
+}
+
+const { skill } = Astro.props;
+---
+<span class="bg-[var(--color-surface,#1a1a1a)] border border-[var(--color-border)] text-[var(--color-text)] text-sm px-3 py-1 rounded-full">
+  {skill}
+</span>
