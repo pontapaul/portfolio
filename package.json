@@ -17,5 +17,9 @@
     "astro": "^6.1.2",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "ascii-art": "^2.8.5"
   }
 }
