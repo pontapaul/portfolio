@@ -1,19 +1,104 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import SkillBadge from '../components/SkillBadge.astro';
+
+const experiences = [
+  {
+    role: "Fullstack Developer",
+    company: "4HSE Srl",
+    location: "Verona, IT",
+    period: "Settembre 2024 – Aprile 2026",
+    description: "Manutenzione evolutiva e miglioramento continuo della piattaforma software per la gestione della sicurezza sul lavoro. Stack: PHP Yii2 (backend multitenant) + vanilla JavaScript (frontend custom).",
+    tags: ["PHP", "Yii2", "JavaScript"],
+  },
+  {
+    role: "Tech Lead",
+    company: "Neosperience Spa",
+    location: "Bassano del Grappa, IT",
+    period: "Ottobre 2023 – Settembre 2025",
+    description: "Coordinamento e supervisione dei team di sviluppo. Consolidamento delle skill organizzative e di analisi, mantenendo continuità con lo sviluppo del core della piattaforma.",
+    tags: ["Team Lead", "Management", "Laravel", "Vue.js"],
+  },
+  {
+    role: "Full Stack Developer",
+    company: "NeoSperience – Workup",
+    location: "Bassano del Grappa, IT",
+    period: "Marzo 2021 – Settembre 2023",
+    description: "Rework completo del CMS con NuxtJS e backend headless Laravel. R&D frontend e backend, affiancamento colleghi, sviluppo ecommerce avanzati.",
+    tags: ["NuxtJS", "Laravel", "Vue.js", "PHP"],
+  },
+  {
+    role: "Backend Developer",
+    company: "Eurostep",
+    location: "Montebelluna, IT",
+    period: "Ottobre 2020 – Marzo 2021",
+    description: "Sviluppo di una piattaforma per collegare servizi e-commerce, con focus su modularità dei package Laravel e design pattern.",
+    tags: ["Laravel", "PHP"],
+  },
+  {
+    role: "R&D Developer",
+    company: "Workup",
+    location: "Bassano del Grappa, IT",
+    period: "Gennaio 2017 – Settembre 2019",
+    description: "Sviluppo di un CMS custom modulare basato su Laravel, con integrazioni a servizi esterni (Algolia, AWS). Migrazione frontend da jQuery a VueJS.",
+    tags: ["Laravel", "VueJS", "jQuery", "PHP"],
+  },
+];
+
+const skillGroups = [
+  { category: "Backend",    skills: ["PHP", "Laravel", "Yii2", "MySQL"] },
+  { category: "Frontend",   skills: ["Vue.js", "Nuxt.js", "TypeScript", "JavaScript", "TailwindCSS"] },
+  { category: "DevOps",     skills: ["Docker", "Nginx", "Git"] },
+  { category: "Soft skill", skills: ["Team work", "Tech Lead", "Management"] },
+];
 ---
 <BaseLayout title="Portfolio — Paolo Pontarollo">
-  <section class="py-8">
-    <h1 class="text-4xl font-bold mb-2">Portfolio</h1>
-    <p class="text-[var(--color-muted)] mb-10">Esperienza lavorativa e competenze tecniche.</p>
+  <section class="py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+      <h1 class="text-4xl font-bold mb-2">Portfolio</h1>
+      <p class="text-[var(--color-muted)]">Esperienza lavorativa e competenze tecniche.</p>
+    </div>
+    <a
+      href="/assets/cv.pdf"
+      download
+      class="self-start sm:self-auto border border-[var(--color-accent)] text-[var(--color-accent)] px-5 py-2 rounded hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors font-medium whitespace-nowrap"
+    >
+      ↓ Scarica CV
+    </a>
   </section>
 
   <section class="mt-4">
-    <h2 class="text-2xl font-bold mb-6">Esperienza</h2>
-    <p class="text-[var(--color-muted)]">In arrivo...</p>
+    <h2 class="text-2xl font-bold mb-8">Esperienza</h2>
+    <div class="flex flex-col gap-10">
+      {experiences.map(exp => (
+        <ExperienceCard
+          role={exp.role}
+          company={exp.company}
+          location={exp.location}
+          period={exp.period}
+          description={exp.description}
+          tags={exp.tags}
+        />
+      ))}
+    </div>
   </section>
 
-  <section class="mt-12">
-    <h2 class="text-2xl font-bold mb-6">Competenze</h2>
-    <p class="text-[var(--color-muted)]">In arrivo...</p>
+  <section class="mt-16 mb-12">
+    <h2 class="text-2xl font-bold mb-8">Competenze</h2>
+    <div class="flex flex-col gap-8">
+      {skillGroups.map(group => (
+        <div>
+          <h3 class="text-sm font-mono text-[var(--color-muted)] uppercase tracking-widest mb-3">
+            {group.category}
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {group.skills.map(skill => (
+              <SkillBadge skill={skill} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
   </section>
 </BaseLayout>
