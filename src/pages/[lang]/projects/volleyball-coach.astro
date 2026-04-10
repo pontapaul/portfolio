@@ -1,0 +1,59 @@
+---
+import ProjectLayout from '../../../layouts/ProjectLayout.astro';
+import { locales, t } from '../../../i18n';
+import type { Locale } from '../../../i18n';
+
+export function getStaticPaths() {
+  return locales.map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+---
+<ProjectLayout
+  title="volleyball.coach"
+  subtitle={t(lang, 'project.coach.subtitle')}
+  tags={["WIP"]}
+  coverImage="/assets/projects/volleyball-coach/cover.svg"
+  wip={true}
+  lang={lang}
+>
+  <section class="space-y-8">
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">{t(lang, 'coach.idea.title')}</h2>
+      <p class="text-[var(--color-text)] leading-relaxed">
+        {t(lang, 'coach.idea.body')}
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">{t(lang, 'coach.tools.title')}</h2>
+      <ul class="space-y-2 text-[var(--color-text)]">
+        <li class="flex items-start gap-2">
+          <span class="text-[var(--color-accent)] mt-0.5">→</span>
+          <span><strong>{t(lang, 'coach.tools.roster')}</strong> — {t(lang, 'coach.tools.roster.desc')}</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-[var(--color-accent)] mt-0.5">→</span>
+          <span><strong>{t(lang, 'coach.tools.stats')}</strong> — {t(lang, 'coach.tools.stats.desc')}</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-[var(--color-accent)] mt-0.5">→</span>
+          <span><strong>{t(lang, 'coach.tools.training')}</strong> — {t(lang, 'coach.tools.training.desc')}</span>
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-[var(--color-accent)] mt-0.5">→</span>
+          <span><strong>{t(lang, 'coach.tools.sheets')}</strong> — {t(lang, 'coach.tools.sheets.desc')}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="border border-dashed border-[var(--color-border)] rounded-lg p-6 text-center">
+      <p class="text-2xl mb-3">🏐</p>
+      <p class="text-[var(--color-muted)] text-sm font-mono mb-1">{t(lang, 'coach.status.label')}</p>
+      <p class="text-[var(--color-accent)] font-bold text-lg">{t(lang, 'coach.status.value')}</p>
+      <p class="text-[var(--color-muted)] text-sm mt-2">
+        {t(lang, 'coach.status.note')}
+      </p>
+    </div>
+  </section>
+</ProjectLayout>

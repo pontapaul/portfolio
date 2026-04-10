@@ -1,5 +1,13 @@
 ---
 import AsciiPortrait from './AsciiPortrait.astro';
+import type { Locale } from '../i18n';
+import { t, localePath } from '../i18n';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'it' } = Astro.props;
 ---
 <section class="relative min-h-screen flex items-end overflow-hidden">
   <!-- Portrait as full-viewport background -->
@@ -10,23 +18,23 @@ import AsciiPortrait from './AsciiPortrait.astro';
   <!-- Text overlay -->
   <div class="relative z-10 w-full pb-16 px-6 pt-20 bg-gradient-to-t from-bg via-bg/60 via-40% to-transparent">
     <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4">
-      Ciao, sono<br />Paolo Pontarollo.
+      {t(lang, 'hero.greeting')}<br />{t(lang, 'hero.name')}
     </h1>
-    <p class="text-accent text-xl font-semibold mb-2">Full Stack Developer</p>
-    <p class="text-muted text-sm font-mono mb-8">Laravel · Vue.js · Docker</p>
+    <p class="text-accent text-xl font-semibold mb-2">{t(lang, 'hero.role')}</p>
+    <p class="text-muted text-sm font-mono mb-8">{t(lang, 'hero.stack')}</p>
 
     <div class="flex flex-wrap gap-3 mb-8">
       <a
-        href="/portfolio"
+        href={localePath(lang, '/portfolio')}
         class="border border-accent text-accent px-5 py-2 text-sm font-medium hover:bg-accent hover:text-bg transition-colors"
       >
-        Portfolio
+        {t(lang, 'hero.portfolio')}
       </a>
       <a
         href="mailto:pontapaul@gmail.com"
         class="border border-accent text-accent px-5 py-2 text-sm font-medium hover:bg-accent hover:text-bg transition-colors"
       >
-        Contattami
+        {t(lang, 'hero.contact')}
       </a>
     </div>
 
@@ -56,7 +64,7 @@ import AsciiPortrait from './AsciiPortrait.astro';
     </div>
 
     <p class="text-muted mt-10 max-w-2xl leading-relaxed">
-      Full stack developer con quasi 10 anni di esperienza nello sviluppo di applicazioni web, dal database all'interfaccia utente.
+      {t(lang, 'hero.bio')}
     </p>
   </div>
 </section>

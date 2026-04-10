@@ -1,0 +1,60 @@
+---
+import ProjectLayout from '../../../layouts/ProjectLayout.astro';
+import { locales, t } from '../../../i18n';
+import type { Locale } from '../../../i18n';
+
+export function getStaticPaths() {
+  return locales.map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+---
+<ProjectLayout
+  title="TSC Green Volley"
+  subtitle={t(lang, 'project.tsc.subtitle')}
+  tags={["Laravel", "Vue 3", "Framework7", "MySQL"]}
+  coverImage="/assets/projects/tsc-green-volley/cover.svg"
+  liveUrl="https://tscgreenvolley.it"
+  repoUrl="https://github.com/pontapaul/tsc"
+  lang={lang}
+>
+  <section class="space-y-8">
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">{t(lang, 'tsc.context.title')}</h2>
+      <p class="text-[var(--color-text)] leading-relaxed">
+        {t(lang, 'tsc.context.body')}
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">{t(lang, 'tsc.problem.title')}</h2>
+      <p class="text-[var(--color-text)] leading-relaxed">
+        {t(lang, 'tsc.problem.body')}
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">{t(lang, 'tsc.solution.title')}</h2>
+      <p class="text-[var(--color-text)] leading-relaxed">
+        {t(lang, 'tsc.solution.body')}
+      </p>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">{t(lang, 'tsc.stack.title')}</h2>
+      <ul class="space-y-1 text-[var(--color-text)]">
+        <li><span class="text-[var(--color-muted)] font-mono text-sm">Backend</span> — {t(lang, 'tsc.stack.backend')}</li>
+        <li><span class="text-[var(--color-muted)] font-mono text-sm">Frontend</span> — {t(lang, 'tsc.stack.frontend')}</li>
+        <li><span class="text-[var(--color-muted)] font-mono text-sm">Database</span> — {t(lang, 'tsc.stack.database')}</li>
+        <li><span class="text-[var(--color-muted)] font-mono text-sm">{lang === 'it' ? 'Infrastruttura' : 'Infrastructure'}</span> — {t(lang, 'tsc.stack.infra')}</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xl font-bold mb-2 text-[var(--color-accent)]">{t(lang, 'tsc.notes.title')}</h2>
+      <p class="text-[var(--color-text)] leading-relaxed">
+        {t(lang, 'tsc.notes.body')}
+      </p>
+    </div>
+  </section>
+</ProjectLayout>

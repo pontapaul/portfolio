@@ -1,5 +1,7 @@
 ---
 import ProjectCover from './ProjectCover.astro';
+import type { Locale } from '../i18n';
+import { localePath } from '../i18n';
 
 interface Props {
   slug: string;
@@ -8,11 +10,12 @@ interface Props {
   tags: string[];
   coverImage?: string;
   wip?: boolean;
+  lang?: Locale;
 }
 
-const { slug, title, subtitle, tags, coverImage, wip } = Astro.props;
+const { slug, title, subtitle, tags, coverImage, wip, lang = 'it' } = Astro.props;
 ---
-<a href={`/projects/${slug}`} class="group block border-b border-border py-8">
+<a href={localePath(lang, `/projects/${slug}`)} class="group block border-b border-border py-8">
   <div class="relative flex flex-col md:flex-row md:items-center gap-6">
     <!-- Left: meta + title -->
     <div class="flex-1 min-w-0">
@@ -38,6 +41,7 @@ const { slug, title, subtitle, tags, coverImage, wip } = Astro.props;
         src={coverImage}
         alt={title}
         class="w-full h-full object-cover group-hover:scale-105 group-hover:brightness-110 transition-transform duration-300 rounded-lg"
+        lang={lang}
       />
     </div>
   </div>

@@ -2,15 +2,20 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import type { Locale } from '../i18n';
+import { localePath, getAlternatePath } from '../i18n';
 
 interface Props {
   title?: string;
+  lang?: Locale;
 }
 
-const { title = 'Paolo Pontarollo' } = Astro.props;
+const { title = 'Paolo Pontarollo', lang = 'it' } = Astro.props;
+const currentPath = Astro.url.pathname;
+const alt = getAlternatePath(currentPath);
 ---
 <!doctype html>
-<html lang="it">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -21,9 +26,12 @@ const { title = 'Paolo Pontarollo' } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="alternate" hreflang={alt.locale} href={alt.path} />
+    <link rel="alternate" hreflang={lang} href={currentPath} />
+    <link rel="alternate" hreflang="x-default" href={localePath('it', currentPath.replace(/^\/(it|en)/, '') || '/')} />
   </head>
   <body class="min-h-screen flex flex-col">
-    <Nav />
+    <Nav lang={lang} />
     <slot name="fullwidth" />
     <main class="flex-1 px-6 py-12">
       <div class="max-w-4xl mx-auto">

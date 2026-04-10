@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ExperienceCard from '../../components/ExperienceCard.astro';
+import SkillBadge from '../../components/SkillBadge.astro';
+import { locales, t } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+export function getStaticPaths() {
+  return locales.map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+
+const experiences = [
+  {
+    role: t(lang, 'exp.4hse.role'),
+    company: "4HSE Srl",
+    location: "Verona, IT",
+    period: t(lang, 'exp.4hse.period'),
+    description: t(lang, 'exp.4hse.description'),
+    tags: ["PHP", "Yii2", "JavaScript"],
+  },
+  {
+    role: t(lang, 'exp.neo.lead.role'),
+    company: "Neosperience Spa",
+    location: "Bassano del Grappa, IT",
+    period: t(lang, 'exp.neo.lead.period'),
+    description: t(lang, 'exp.neo.lead.description'),
+    tags: ["Team Lead", "Management", "Laravel", "Vue.js"],
+  },
+  {
+    role: t(lang, 'exp.neo.dev.role'),
+    company: "NeoSperience – Workup",
+    location: "Bassano del Grappa, IT",
+    period: t(lang, 'exp.neo.dev.period'),
+    description: t(lang, 'exp.neo.dev.description'),
+    tags: ["NuxtJS", "Laravel", "Vue.js", "PHP"],
+  },
+  {
+    role: t(lang, 'exp.eurostep.role'),
+    company: "Eurostep",
+    location: "Montebelluna, IT",
+    period: t(lang, 'exp.eurostep.period'),
+    description: t(lang, 'exp.eurostep.description'),
+    tags: ["Laravel", "PHP"],
+  },
+  {
+    role: t(lang, 'exp.workup.role'),
+    company: "Workup",
+    location: "Bassano del Grappa, IT",
+    period: t(lang, 'exp.workup.period'),
+    description: t(lang, 'exp.workup.description'),
+    tags: ["Laravel", "VueJS", "jQuery", "PHP"],
+  },
+];
+
+const otherExperiences = [
+  {
+    role: t(lang, 'exp.volley1.role'),
+    company: "Volley Rosà / New Volley Cartigliano",
+    location: "Rosà / Cartigliano, IT",
+    period: t(lang, 'exp.volley1.period'),
+    description: t(lang, 'exp.volley1.description'),
+    tags: ["Coaching", lang === 'it' ? "Pallavolo" : "Volleyball", "Leadership"],
+  },
+  {
+    role: t(lang, 'exp.volley2.role'),
+    company: "Bassano Volley",
+    location: "Bassano del Grappa, IT",
+    period: t(lang, 'exp.volley2.period'),
+    description: t(lang, 'exp.volley2.description'),
+    tags: ["Coaching", lang === 'it' ? "Pallavolo" : "Volleyball"],
+  },
+];
+
+const skillGroups = [
+  { category: "Backend",    skills: ["PHP", "Laravel", "Yii2", "MySQL"] },
+  { category: "Frontend",   skills: ["Vue.js", "Nuxt.js", "TypeScript", "JavaScript", "TailwindCSS"] },
+  { category: "DevOps",     skills: ["Docker", "Nginx", "Git"] },
+  { category: "Soft skill", skills: ["Team work", "Tech Lead", "Management"] },
+];
+---
+<BaseLayout title="Portfolio — Paolo Pontarollo" lang={lang}>
+  <section class="py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+      <h1 class="text-4xl font-bold mb-2">{t(lang, 'portfolio.title')}</h1>
+      <p class="text-[var(--color-muted)]">{t(lang, 'portfolio.subtitle')}</p>
+    </div>
+    <a
+      href="/assets/cv.pdf"
+      download
+      class="self-start sm:self-auto border border-[var(--color-accent)] text-[var(--color-accent)] px-5 py-2 rounded hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors font-medium whitespace-nowrap"
+    >
+      {t(lang, 'portfolio.downloadCv')}
+    </a>
+  </section>
+
+  <nav class="flex flex-wrap gap-3 text-sm font-mono mb-8">
+    <a href="#esperienza" class="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors">{t(lang, 'portfolio.navExperience')}</a>
+    <a href="#altre-esperienze" class="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors">{t(lang, 'portfolio.navOtherExperience')}</a>
+    <a href="#competenze" class="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors">{t(lang, 'portfolio.navSkills')}</a>
+  </nav>
+
+  <section id="esperienza" class="mt-4 scroll-mt-24">
+    <h2 class="text-2xl font-bold mb-8">{t(lang, 'portfolio.experienceTitle')}</h2>
+    <div class="flex flex-col gap-10">
+      {experiences.map(exp => (
+        <ExperienceCard
+          role={exp.role}
+          company={exp.company}
+          location={exp.location}
+          period={exp.period}
+          description={exp.description}
+          tags={exp.tags}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section id="altre-esperienze" class="mt-16 scroll-mt-24">
+    <h2 class="text-2xl font-bold mb-8">{t(lang, 'portfolio.otherExperienceTitle')}</h2>
+    <div class="flex flex-col gap-10">
+      {otherExperiences.map(exp => (
+        <ExperienceCard
+          role={exp.role}
+          company={exp.company}
+          location={exp.location}
+          period={exp.period}
+          description={exp.description}
+          tags={exp.tags}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section id="competenze" class="mt-16 mb-12 scroll-mt-24">
+    <h2 class="text-2xl font-bold mb-8">{t(lang, 'portfolio.skillsTitle')}</h2>
+    <div class="flex flex-col gap-8">
+      {skillGroups.map(group => (
+        <div>
+          <h3 class="text-sm font-mono text-[var(--color-muted)] uppercase tracking-widest mb-3">
+            {group.category}
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {group.skills.map(skill => (
+              <SkillBadge skill={skill} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
