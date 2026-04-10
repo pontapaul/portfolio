@@ -46,6 +46,25 @@ const experiences = [
   },
 ];
 
+const otherExperiences = [
+  {
+    role: "Allenatore di Pallavolo",
+    company: "Volley Rosà / New Volley Cartigliano",
+    location: "Rosà / Cartigliano, IT",
+    period: "2023 – Presente",
+    description: "Allenatore di squadre giovanili e senior. Pianificazione allenamenti, gestione partite e sviluppo tecnico-tattico dei giocatori.",
+    tags: ["Coaching", "Pallavolo", "Leadership"],
+  },
+  {
+    role: "Allenatore di Pallavolo",
+    company: "Bassano Volley",
+    location: "Bassano del Grappa, IT",
+    period: "2020 – 2023",
+    description: "Allenatore nel settore giovanile. Formazione tecnica e crescita sportiva degli atleti.",
+    tags: ["Coaching", "Pallavolo"],
+  },
+];
+
 const skillGroups = [
   { category: "Backend",    skills: ["PHP", "Laravel", "Yii2", "MySQL"] },
   { category: "Frontend",   skills: ["Vue.js", "Nuxt.js", "TypeScript", "JavaScript", "TailwindCSS"] },
@@ -57,7 +76,7 @@ const skillGroups = [
   <section class="py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
       <h1 class="text-4xl font-bold mb-2">Portfolio</h1>
-      <p class="text-[var(--color-muted)]">Esperienza lavorativa e competenze tecniche.</p>
+      <p class="text-[var(--color-muted)]">Percorso professionale, esperienze e competenze.</p>
     </div>
     <a
       href="/assets/cv.pdf"
@@ -68,8 +87,14 @@ const skillGroups = [
     </a>
   </section>
 
-  <section class="mt-4">
-    <h2 class="text-2xl font-bold mb-8">Esperienza</h2>
+  <nav class="flex flex-wrap gap-3 text-sm font-mono mb-8">
+    <a href="#esperienza" class="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors">· Esperienza lavorativa</a>
+    <a href="#altre-esperienze" class="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors">· Altre esperienze</a>
+    <a href="#competenze" class="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors">· Competenze</a>
+  </nav>
+
+  <section id="esperienza" class="mt-4 scroll-mt-24">
+    <h2 class="text-2xl font-bold mb-8">Esperienza lavorativa</h2>
     <div class="flex flex-col gap-10">
       {experiences.map(exp => (
         <ExperienceCard
@@ -84,7 +109,23 @@ const skillGroups = [
     </div>
   </section>
 
-  <section class="mt-16 mb-12">
+  <section id="altre-esperienze" class="mt-16 scroll-mt-24">
+    <h2 class="text-2xl font-bold mb-8">Altre esperienze</h2>
+    <div class="flex flex-col gap-10">
+      {otherExperiences.map(exp => (
+        <ExperienceCard
+          role={exp.role}
+          company={exp.company}
+          location={exp.location}
+          period={exp.period}
+          description={exp.description}
+          tags={exp.tags}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section id="competenze" class="mt-16 mb-12 scroll-mt-24">
     <h2 class="text-2xl font-bold mb-8">Competenze</h2>
     <div class="flex flex-col gap-8">
       {skillGroups.map(group => (
