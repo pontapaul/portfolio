@@ -1,32 +1,41 @@
 ---
+import type { Locale } from '../i18n';
+import { t } from '../i18n';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'it' } = Astro.props;
+
 const items = [
   {
     icon: "🏐",
-    title: "Pallavolo",
-    body: "Gioco a pallavolo da vent'anni. Non è un hobby — è il campo dove ho imparato a lavorare in squadra, a stare sul pezzo sotto pressione e ad accettare la sconfitta senza dramma. E sì, due dei miei progetti nascono proprio da lì.",
+    title: t(lang, 'beyond.volleyball.title'),
+    body: t(lang, 'beyond.volleyball.body'),
   },
   {
     icon: "🖥️",
-    title: "Self-hosting",
-    body: "Giro buona parte dei miei servizi su un server in casa. Non perché sia più efficiente, ma perché mi piace sapere come funziona ogni pezzo. Docker, Nginx, Proxmox — la mia infrastruttura è un playground permanente.",
+    title: t(lang, 'beyond.selfhosting.title'),
+    body: t(lang, 'beyond.selfhosting.body'),
   },
   {
     icon: "📐",
-    title: "Ossessioni progettuali",
-    body: "Nomi delle variabili. Struttura dei commit. Leggibilità prima della scalabilità prematura. Non sono dettagli marginali — sono la differenza tra codice che sopravvive e codice che si accumula.",
+    title: t(lang, 'beyond.obsessions.title'),
+    body: t(lang, 'beyond.obsessions.body'),
   },
   {
     icon: "🔄",
-    title: "Iterazione, non perfezione",
-    body: "Ho imparato che la versione migliore di qualcosa è quella che esiste e funziona. Si costruisce, si rompe, si migliora. Il perfezionismo è nemico del valore reale — preferisco consegnare e correggere.",
+    title: t(lang, 'beyond.iteration.title'),
+    body: t(lang, 'beyond.iteration.body'),
   },
 ];
 ---
 
 <section class="mt-24">
-  <h2 class="text-muted text-sm font-mono uppercase tracking-widest mb-3">Oltre il codice</h2>
+  <h2 class="text-muted text-sm font-mono uppercase tracking-widest mb-3">{t(lang, 'beyond.title')}</h2>
   <p class="text-text/70 text-base mb-10 max-w-xl leading-relaxed">
-    Quello che non entra in un CV ma che definisce come lavoro — e chi sono.
+    {t(lang, 'beyond.subtitle')}
   </p>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">

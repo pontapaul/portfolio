@@ -1,3 +1,6 @@
+import type { Locale, TranslationKey } from "../i18n";
+import { t } from "../i18n";
+
 export interface Project {
   slug: string;
   title: string;
@@ -11,14 +14,26 @@ export interface Project {
   featured: boolean;
 }
 
-export const projects: Project[] = [
+interface ProjectDef {
+  slug: string;
+  title: string;
+  subtitleKey: TranslationKey;
+  descriptionKey: TranslationKey;
+  tags: string[];
+  liveUrl?: string;
+  repoUrl?: string;
+  coverImage?: string;
+  wip?: boolean;
+  featured: boolean;
+}
+
+const projectDefs: ProjectDef[] = [
   // — FEATURED (full detail page + cover image) —
   {
     slug: "tsc-green-volley",
     title: "TSC Green Volley",
-    subtitle: "Gestionale per torneo di beach volley",
-    description:
-      "Piattaforma per la gestione completa del torneo estivo TSC Green Volley: iscrizioni squadre, gironi, tabelloni, classifiche e risultati in tempo reale.",
+    subtitleKey: "project.tsc.subtitle",
+    descriptionKey: "project.tsc.description",
     tags: ["Laravel", "Vue 3", "Framework7", "MySQL"],
     liveUrl: "https://tscgreenvolley.it",
     repoUrl: "https://github.com/pontapaul/tsc",
@@ -28,9 +43,8 @@ export const projects: Project[] = [
   {
     slug: "volleyball-coach",
     title: "volleyball.coach",
-    subtitle: "Suite di strumenti per allenatori di pallavolo",
-    description:
-      "Suite di strumenti digitali per allenatori: gestione rosa, statistiche partite, pianificazione allenamenti.",
+    subtitleKey: "project.coach.subtitle",
+    descriptionKey: "project.coach.description",
     tags: ["WIP"],
     coverImage: "/assets/projects/volleyball-coach/cover.svg",
     wip: true,
@@ -40,9 +54,8 @@ export const projects: Project[] = [
   {
     slug: "cgc",
     title: "CGC",
-    subtitle: "Gestionale torneo — fork evoluto di TSC",
-    description:
-      "Fork evolutivo di TSC Green Volley, adattato per il torneo CGC. Stessa base tecnica, nuove funzionalità e personalizzazioni specifiche per il contesto.",
+    subtitleKey: "project.cgc.subtitle",
+    descriptionKey: "project.cgc.description",
     tags: ["Laravel", "Vue 3", "Framework7", "MySQL"],
     repoUrl: "https://github.com/pontapaul/cgc",
     featured: false,
@@ -50,9 +63,8 @@ export const projects: Project[] = [
   {
     slug: "jdownloader-web",
     title: "jdownloader-web",
-    subtitle: "Web UI moderna per JDownloader2",
-    description:
-      "Interfaccia web self-hosted per JDownloader2, ispirata alla UI desktop. Vue 3 + Docker.",
+    subtitleKey: "project.jdownloader.subtitle",
+    descriptionKey: "project.jdownloader.description",
     tags: ["Vue 3", "TypeScript", "Docker"],
     repoUrl: "https://github.com/pontapaul/jdownloader-web",
     wip: true,
@@ -61,12 +73,26 @@ export const projects: Project[] = [
   {
     slug: "portfolio",
     title: "portfolio",
-    subtitle: "Questo sito",
-    description:
-      "Il sito che stai guardando — portfolio personale costruito con Astro.",
+    subtitleKey: "project.portfolio.subtitle",
+    descriptionKey: "project.portfolio.description",
     tags: ["Astro", "TypeScript", "TailwindCSS"],
     repoUrl: "https://github.com/pontapaul/portfolio",
     liveUrl: "/",
     featured: false,
   },
 ];
+
+export function getProjects(locale: Locale): Project[] {
+  return projectDefs.map((def) => ({
+    slug: def.slug,
+    title: def.title,
+    subtitle: t(locale, def.subtitleKey),
+    description: t(locale, def.descriptionKey),
+    tags: def.tags,
+    liveUrl: def.liveUrl,
+    repoUrl: def.repoUrl,
+    coverImage: def.coverImage,
+    wip: def.wip,
+    featured: def.featured,
+  }));
+}

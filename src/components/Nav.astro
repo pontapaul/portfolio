@@ -1,25 +1,37 @@
 ---
+import type { Locale } from '../i18n';
+import { t, localePath, getAlternatePath } from '../i18n';
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = 'it' } = Astro.props;
+
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/projects", label: "Progetti" },
+  { href: localePath(lang), label: t(lang, 'nav.home') },
+  { href: localePath(lang, '/portfolio'), label: t(lang, 'nav.portfolio') },
+  { href: localePath(lang, '/projects'), label: t(lang, 'nav.projects') },
 ];
 const current = Astro.url.pathname;
 
 function isActive(href: string) {
-  if (href === "/") return current === "/";
+  if (href === localePath(lang)) return current === localePath(lang) || current === localePath(lang) + '/';
   return current.startsWith(href);
 }
+
+const alt = getAlternatePath(current);
+const altLabel = alt.locale.toUpperCase();
 ---
 
 <nav class="sticky top-0 z-50 bg-black/80 backdrop-blur border-b border-[var(--color-border)]">
   <div class="relative max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="/" class="text-[var(--color-accent)] font-bold hover:opacity-80 transition-opacity">
+    <a href={localePath(lang)} class="text-[var(--color-accent)] font-bold hover:opacity-80 transition-opacity">
       Paolo Pontarollo
     </a>
 
     <!-- Desktop nav -->
-    <ul class="hidden sm:flex gap-6 text-sm">
+    <ul class="hidden sm:flex items-center gap-6 text-sm">
       {links.map(({ href, label }) => (
         <li>
           <a
@@ -32,6 +44,14 @@ function isActive(href: string) {
           </a>
         </li>
       ))}
+      <li>
+        <a
+          href={alt.path}
+          class="text-xs font-mono border border-[var(--color-border)] text-[var(--color-muted)] px-2 py-1 rounded hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-colors"
+        >
+          {altLabel}
+        </a>
+      </li>
     </ul>
 
     <!-- Mobile nav (CSS-only via <details>) -->
@@ -54,6 +74,14 @@ function isActive(href: string) {
             </a>
           </li>
         ))}
+        <li class="border-t border-[var(--color-border)] mt-1 pt-1">
+          <a
+            href={alt.path}
+            class="block px-4 py-2 text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors font-mono text-xs"
+          >
+            {altLabel}
+          </a>
+        </li>
       </ul>
     </details>
   </div>

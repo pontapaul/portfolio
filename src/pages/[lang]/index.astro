@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/HeroSection.astro';
+import ProjectPreview from '../../components/ProjectPreview.astro';
+import BeyondSection from '../../components/BeyondSection.astro';
+import { getProjects } from '../../data/projects.ts';
+import { locales, t, localePath } from '../../i18n';
+import type { Locale } from '../../i18n';
+
+export function getStaticPaths() {
+  return locales.map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: Locale };
+const projects = getProjects(lang);
+const featured = projects.filter(p => p.featured);
+---
+<BaseLayout title="Paolo Pontarollo — Full Stack Developer" lang={lang}>
+  <HeroSection slot="fullwidth" lang={lang} />
+
+  <!-- Narrative intro -->
+  <section class="mt-16 max-w-2xl">
+    <p class="text-text/80 text-lg leading-relaxed">
+      {t(lang, 'home.intro')}
+    </p>
+  </section>
+
+  <!-- Featured projects -->
+  <section class="mt-16">
+    <h2 class="text-muted text-sm font-mono uppercase tracking-widest mb-8">{t(lang, 'home.featuredProjects')}</h2>
+    {featured.map(p => (
+      <ProjectPreview
+        slug={p.slug}
+        title={p.title}
+        subtitle={p.subtitle}
+        tags={p.tags}
+        coverImage={p.coverImage}
+        wip={p.wip}
+        lang={lang}
+      />
+    ))}
+    <div class="pt-6">
+      <a href={localePath(lang, '/projects')} class="text-sm text-accent border border-accent/30 px-4 py-2 rounded hover:bg-accent/10 transition-colors font-mono">
+        {t(lang, 'home.allProjects')}
+      </a>
+    </div>
+  </section>
+
+  <!-- Beyond the portfolio -->
+  <BeyondSection lang={lang} />
+</BaseLayout>

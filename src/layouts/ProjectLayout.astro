@@ -1,6 +1,8 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import ProjectCover from '../components/ProjectCover.astro';
+import type { Locale } from '../i18n';
+import { t, localePath } from '../i18n';
 
 interface Props {
   title: string;
@@ -10,17 +12,18 @@ interface Props {
   liveUrl?: string;
   repoUrl?: string;
   wip?: boolean;
+  lang?: Locale;
 }
 
-const { title, subtitle, tags, coverImage, liveUrl, repoUrl, wip } = Astro.props;
+const { title, subtitle, tags, coverImage, liveUrl, repoUrl, wip, lang = 'it' } = Astro.props;
 ---
-<BaseLayout title={`${title} — Paolo Pontarollo`}>
+<BaseLayout title={`${title} — Paolo Pontarollo`} lang={lang}>
   <div class="py-8">
     <a
-      href="/#progetti"
+      href={localePath(lang, '/#progetti')}
       class="inline-flex items-center gap-2 text-sm text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors mb-8"
     >
-      ← Back
+      {t(lang, 'projectLayout.back')}
     </a>
 
     <ProjectCover
@@ -28,6 +31,7 @@ const { title, subtitle, tags, coverImage, liveUrl, repoUrl, wip } = Astro.props
       alt={`Cover image for ${title}`}
       class="w-full h-64 md:h-80 object-cover rounded-lg border border-[var(--color-border)] mb-8"
       lazy={false}
+      lang={lang}
     />
 
     <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-8">
