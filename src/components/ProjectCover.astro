@@ -1,0 +1,27 @@
+---
+interface Props {
+  src?: string;
+  alt: string;
+  class?: string;
+  lazy?: boolean;
+}
+
+const { src, alt, class: className = '', lazy = true } = Astro.props;
+const hasCover = !!src;
+---
+
+{hasCover ? (
+  <img
+    src={src}
+    alt={alt}
+    class={className}
+    loading={lazy ? 'lazy' : 'eager'}
+  />
+) : (
+  <div class:list={['flex items-center justify-center bg-[#1a1a1a] border border-[var(--color-border)]', className]}>
+    <div class="text-center">
+      <span class="block text-4xl mb-2 text-accent opacity-40 font-mono">&lt;/&gt;</span>
+      <span class="block text-xs font-mono text-muted opacity-50">screenshot in arrivo</span>
+    </div>
+  </div>
+)}
