@@ -1,0 +1,41 @@
+---
+const items = [
+  {
+    icon: "🏐",
+    title: "Pallavolo",
+    body: "Gioco a pallavolo da vent'anni. Non è un hobby — è il campo dove ho imparato a lavorare in squadra, a stare sul pezzo sotto pressione e ad accettare la sconfitta senza dramma. E sì, due dei miei progetti nascono proprio da lì.",
+  },
+  {
+    icon: "🖥️",
+    title: "Self-hosting",
+    body: "Giro buona parte dei miei servizi su un server in casa. Non perché sia più efficiente, ma perché mi piace sapere come funziona ogni pezzo. Docker, Nginx, Proxmox — la mia infrastruttura è un playground permanente.",
+  },
+  {
+    icon: "📐",
+    title: "Ossessioni progettuali",
+    body: "Nomi delle variabili. Struttura dei commit. Leggibilità prima della scalabilità prematura. Non sono dettagli marginali — sono la differenza tra codice che sopravvive e codice che si accumula.",
+  },
+  {
+    icon: "🔄",
+    title: "Iterazione, non perfezione",
+    body: "Ho imparato che la versione migliore di qualcosa è quella che esiste e funziona. Si costruisce, si rompe, si migliora. Il perfezionismo è nemico del valore reale — preferisco consegnare e correggere.",
+  },
+];
+---
+
+<section class="mt-24">
+  <h2 class="text-muted text-sm font-mono uppercase tracking-widest mb-3">Oltre il codice</h2>
+  <p class="text-text/70 text-base mb-10 max-w-xl leading-relaxed">
+    Quello che non entra in un CV ma che definisce come lavoro — e chi sono.
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {items.map(item => (
+      <div class="bg-surface border border-border rounded-lg p-6 hover:-translate-y-0.5 transition-transform duration-200">
+        <div class="text-2xl mb-3">{item.icon}</div>
+        <h3 class="text-base font-semibold text-text mb-2">{item.title}</h3>
+        <p class="text-muted text-sm leading-relaxed">{item.body}</p>
+      </div>
+    ))}
+  </div>
+</section>
