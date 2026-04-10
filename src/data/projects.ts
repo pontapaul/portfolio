@@ -22,7 +22,7 @@ export const projects: Project[] = [
     tags: ["Laravel", "Vue 3", "Framework7", "MySQL"],
     liveUrl: "https://tscgreenvolley.it",
     repoUrl: "https://github.com/pontapaul/tsc",
-    coverImage: "/assets/projects/tsc-green-volley/cover.png",
+    coverImage: "/assets/projects/tsc-green-volley/cover.svg",
     featured: true,
   },
   {
@@ -32,7 +32,7 @@ export const projects: Project[] = [
     description:
       "Suite di strumenti digitali per allenatori: gestione rosa, statistiche partite, pianificazione allenamenti.",
     tags: ["WIP"],
-    coverImage: "/assets/projects/volleyball-coach/cover.png",
+    coverImage: "/assets/projects/volleyball-coach/cover.svg",
     wip: true,
     featured: true,
   },

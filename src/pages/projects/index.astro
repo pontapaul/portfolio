@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCover from '../../components/ProjectCover.astro';
 import { projects } from '../../data/projects.ts';
 
 const featured = projects.filter(p => p.featured);
@@ -36,16 +37,13 @@ const others = projects.filter(p => !p.featured);
               <span class="inline-block mt-4 text-xs font-mono text-accent">Scopri di più →</span>
             </div>
             <!-- Right: cover image -->
-            {p.coverImage && (
-              <div class="md:w-2/5 aspect-video overflow-hidden rounded-lg flex-shrink-0">
-                <img
-                  src={p.coverImage}
-                  alt={p.title}
-                  class="w-full h-full object-cover group-hover:scale-105 group-hover:brightness-110 transition-transform duration-300"
-                  loading="lazy"
-                />
-              </div>
-            )}
+            <div class="md:w-2/5 aspect-video overflow-hidden rounded-lg flex-shrink-0">
+              <ProjectCover
+                src={p.coverImage}
+                alt={p.title}
+                class="w-full h-full object-cover group-hover:scale-105 group-hover:brightness-110 transition-transform duration-300 rounded-lg"
+              />
+            </div>
           </div>
         </a>
       ))}

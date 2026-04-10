@@ -1,10 +1,12 @@
 ---
+import ProjectCover from './ProjectCover.astro';
+
 interface Props {
   slug: string;
   title: string;
   subtitle: string;
   tags: string[];
-  coverImage: string;
+  coverImage?: string;
   wip?: boolean;
 }
 
@@ -31,15 +33,12 @@ const { slug, title, subtitle, tags, coverImage, wip } = Astro.props;
     </div>
 
     <!-- Right: cover image -->
-    {coverImage && (
-      <div class="md:w-1/2 aspect-video overflow-hidden rounded-lg">
-        <img
-          src={coverImage}
-          alt={title}
-          class="w-full h-full object-cover group-hover:scale-105 group-hover:brightness-110 transition-transform duration-300"
-          loading="lazy"
-        />
-      </div>
-    )}
+    <div class="md:w-1/2 aspect-video overflow-hidden rounded-lg">
+      <ProjectCover
+        src={coverImage}
+        alt={title}
+        class="w-full h-full object-cover group-hover:scale-105 group-hover:brightness-110 transition-transform duration-300 rounded-lg"
+      />
+    </div>
   </div>
 </a>
