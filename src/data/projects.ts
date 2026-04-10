@@ -38,6 +38,16 @@ export const projects: Project[] = [
   },
   // — MINOR (compact row, no detail page) —
   {
+    slug: "cgc",
+    title: "CGC",
+    subtitle: "Gestionale torneo — fork evoluto di TSC",
+    description:
+      "Fork evolutivo di TSC Green Volley, adattato per il torneo CGC. Stessa base tecnica, nuove funzionalità e personalizzazioni specifiche per il contesto.",
+    tags: ["Laravel", "Vue 3", "Framework7", "MySQL"],
+    repoUrl: "https://github.com/pontapaul/cgc",
+    featured: false,
+  },
+  {
     slug: "jdownloader-web",
     title: "jdownloader-web",
     subtitle: "Web UI moderna per JDownloader2",
