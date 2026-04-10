@@ -12,7 +12,7 @@ const minor = projects.filter(p => !p.featured);
 
   <!-- Featured projects -->
   <section class="mt-16">
-    <h2 class="text-muted text-sm font-mono uppercase tracking-widest mb-8">Progetti</h2>
+    <h2 class="text-muted text-sm font-mono uppercase tracking-widest mb-8">Progetti in evidenza</h2>
     {featured.map(p => (
       <ProjectPreview
         slug={p.slug}
@@ -23,31 +23,10 @@ const minor = projects.filter(p => !p.featured);
         wip={p.wip}
       />
     ))}
+    <div class="pt-6">
+      <a href="/projects" class="text-sm text-accent border border-accent/30 px-4 py-2 rounded hover:bg-accent/10 transition-colors font-mono">
+        Tutti i progetti →
+      </a>
+    </div>
   </section>
-
-  <!-- Minor projects -->
-  {minor.length > 0 && (
-    <section class="mt-4">
-      <p class="text-muted text-xs font-mono uppercase tracking-widest mb-4">Altri progetti</p>
-      <ul>
-        {minor.map(p => (
-          <li class="flex justify-between items-center py-3 border-b border-border group">
-            <span>
-              <span class="text-text font-medium group-hover:text-accent transition-colors">{p.title}</span>
-              <span class="text-muted text-sm font-mono"> · {p.tags.join(' · ')}</span>
-            </span>
-            <span class="flex gap-3 items-center">
-              {p.wip && <span class="text-xs text-accent border border-accent/30 px-2 py-0.5 rounded">WIP</span>}
-              {p.repoUrl && (
-                <a href={p.repoUrl} target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition-colors text-sm">↗ GitHub</a>
-              )}
-              {p.liveUrl && (
-                <a href={p.liveUrl} target="_blank" rel="noopener noreferrer" class="text-muted hover:text-accent transition-colors text-sm">↗ Live</a>
-              )}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
 </BaseLayout>
