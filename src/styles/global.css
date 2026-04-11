@@ -7,15 +7,32 @@
   --color-text:    #f0f0f0;
   --color-muted:   #a3a3a3;
   --color-accent:  #38bdf8;
+  --color-nav-bg:  rgba(0, 0, 0, 0.8);
   --font-sans: 'Space Grotesk', sans-serif;
 }
 
+/* Dark theme (default) */
 :root {
   --color-bg:      #111111;
+  --color-surface: #1a1a1a;
+  --color-border:  #2a2a2a;
   --color-text:    #f0f0f0;
   --color-muted:   #a3a3a3;
   --color-accent:  #38bdf8;
-  --color-border:  #2a2a2a;
+  --color-nav-bg:  rgba(0, 0, 0, 0.8);
+  color-scheme: dark;
+}
+
+/* Light theme */
+:root[data-theme="light"] {
+  --color-bg:      #faf8f5;
+  --color-surface: #f0ece6;
+  --color-border:  #d9d0c7;
+  --color-text:    #2c2420;
+  --color-muted:   #7a6e63;
+  --color-accent:  #b45a2b;
+  --color-nav-bg:  rgba(250, 248, 245, 0.85);
+  color-scheme: light;
 }
 
 html {
