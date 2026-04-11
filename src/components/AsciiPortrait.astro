@@ -11,6 +11,9 @@
       if (!canvas) return;
       const ctx = canvas.getContext('2d')!;
 
+      // Detect current theme
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
       // Read accent color from CSS variable
       const style = getComputedStyle(document.documentElement);
       const accentHex = style.getPropertyValue('--color-accent').trim();
@@ -91,7 +94,11 @@
             const i = (imgY * imgCols + imgX) * 4;
             const r = d[i], g = d[i + 1], b = d[i + 2];
             const lum = 0.299 * r + 0.587 * g + 0.114 * b;
-            const opacity = 0.05 + (lum / 255) * 0.70;
+            // Dark theme: bright pixels → opaque (face is silhouette in colored field)
+            // Light theme: invert — dark pixels → opaque (face stands out on light bg)
+            const opacity = isLight
+              ? 0.05 + ((255 - lum) / 255) * 0.70
+              : 0.05 + (lum / 255) * 0.70;
 
             if (opacity < 0.15) {
               if (Math.random() < 0.04) {
@@ -104,8 +111,9 @@
             ctx.fillStyle = `rgba(${accentRgb},${opacity.toFixed(2)})`;
             ctx.fillRect(px, py, cellSize - gap, cellSize - gap);
           } else {
-            // Outside image — same tone as the wall
-            ctx.fillStyle = `rgba(${accentRgb},0.75)`;
+            // Outside image — fill to match: solid in dark, subtle in light
+            const wallOpacity = isLight ? 0.08 : 0.75;
+            ctx.fillStyle = `rgba(${accentRgb},${wallOpacity})`;
             ctx.fillRect(px, py, cellSize - gap, cellSize - gap);
           }
         }
