@@ -5,8 +5,7 @@
   function drawPortrait() {
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    const theme = document.documentElement.getAttribute('data-theme') || 'dark';
-    img.src = theme === 'light' ? '/assets/nobg.png' : '/assets/nobgwhite.jpg';
+    img.src = '/assets/nobgwhite.jpg';
     img.onload = () => {
       const canvas = document.getElementById('ascii-portrait') as HTMLCanvasElement;
       if (!canvas) return;
