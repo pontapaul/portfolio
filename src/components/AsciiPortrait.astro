@@ -101,9 +101,14 @@
               : 0.05 + (lum / 255) * 0.70;
 
             if (opacity < 0.15) {
-              if (Math.random() < 0.04) {
-                ctx.fillStyle = `rgba(${accentRgb},${(0.05 + Math.random() * 0.1).toFixed(2)})`;
+              if (isLight) {
+                ctx.fillStyle = `rgba(${accentRgb},0.08)`;
                 ctx.fillRect(px, py, cellSize - gap, cellSize - gap);
+              } else {
+                if (Math.random() < 0.04) {
+                  ctx.fillStyle = `rgba(${accentRgb},${(0.05 + Math.random() * 0.1).toFixed(2)})`;
+                  ctx.fillRect(px, py, cellSize - gap, cellSize - gap);
+                }
               }
               continue;
             }
