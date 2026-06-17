@@ -1,4 +1,10 @@
 export default {
+  // Meta / SEO
+  "meta.description": "Full Stack Developer con quasi 10 anni di esperienza nello sviluppo di applicazioni web. Laravel, Vue.js, Nuxt.js, TypeScript, Docker.",
+  "meta.home.description": "Paolo Pontarollo, Full Stack Developer da Bassano del Grappa. Quasi 10 anni di esperienza con Laravel, Vue.js, Nuxt.js, TypeScript e Docker. Scopri progetti e portfolio.",
+  "meta.portfolio.description": "Esperienza professionale, competenze tecniche e percorso di Paolo Pontarollo, Full Stack Developer. Backend PHP/Laravel, frontend Vue.js/Nuxt.js. Scarica il CV.",
+  "meta.projects.description": "Progetti personali e open source di Paolo Pontarollo: applicazioni web full stack realizzate con Laravel, Vue 3, Nuxt.js, TypeScript e Docker.",
+
   // Nav
   "nav.home": "Home",
   "nav.portfolio": "Portfolio",

@@ -3,16 +3,56 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 import type { Locale } from '../i18n';
-import { localePath, getAlternatePath } from '../i18n';
+import { localePath, getAlternatePath, t } from '../i18n';
 
 interface Props {
   title?: string;
+  description?: string;
+  ogType?: 'website' | 'article' | 'profile';
   lang?: Locale;
 }
 
-const { title = 'Paolo Pontarollo', lang = 'it' } = Astro.props;
+const { title = 'Paolo Pontarollo', description, ogType = 'website', lang = 'it' } = Astro.props;
 const currentPath = Astro.url.pathname;
 const alt = getAlternatePath(currentPath);
+
+const metaDescription = description ?? t(lang, 'meta.description');
+const canonicalUrl = new URL(currentPath, Astro.site).href;
+const ogImageUrl = new URL('/assets/og-image.png', Astro.site).href;
+const ogImageAlt = 'Paolo Pontarollo — Full Stack Developer';
+const ogLocale = lang === 'it' ? 'it_IT' : 'en_US';
+const altOgLocale = lang === 'it' ? 'en_US' : 'it_IT';
+
+// Structured data — helps search engines understand who/what the site is about.
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Paolo Pontarollo',
+  jobTitle: 'Full Stack Developer',
+  url: Astro.site?.href,
+  image: ogImageUrl,
+  email: 'mailto:pontapaul@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Bassano del Grappa',
+    addressRegion: 'VI',
+    addressCountry: 'IT',
+  },
+  knowsAbout: ['Laravel', 'PHP', 'Vue.js', 'Nuxt.js', 'TypeScript', 'TailwindCSS', 'Docker'],
+  sameAs: [
+    'https://www.linkedin.com/in/paolo-pontarollo',
+    'https://github.com/pontapaul',
+  ],
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Paolo Pontarollo',
+  url: Astro.site?.href,
+  inLanguage: lang === 'it' ? 'it-IT' : 'en-US',
+  author: { '@type': 'Person', name: 'Paolo Pontarollo' },
+};
 ---
 <!doctype html>
 <html lang={lang}>
@@ -25,11 +65,47 @@ const alt = getAlternatePath(currentPath);
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <meta name="description" content={metaDescription} />
+    <meta name="author" content="Paolo Pontarollo" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#111111" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Favicons & manifest -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Paolo Pontarollo" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={altOgLocale} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">

@@ -80,15 +80,15 @@ const skillGroups = [
   { category: "Soft skill", skills: ["Team work", "Tech Lead", "Management"] },
 ];
 ---
-<BaseLayout title="Portfolio — Paolo Pontarollo" lang={lang}>
+<BaseLayout title="Portfolio — Paolo Pontarollo" description={t(lang, 'meta.portfolio.description')} lang={lang}>
   <section class="py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
       <h1 class="text-4xl font-bold mb-2">{t(lang, 'portfolio.title')}</h1>
       <p class="text-[var(--color-muted)]">{t(lang, 'portfolio.subtitle')}</p>
     </div>
     <a
-      href="/assets/cv.pdf"
-      download
+      href={`/assets/cv-${lang}.pdf`}
+      download={`CV_Paolo_Pontarollo_${lang}.pdf`}
       class="self-start sm:self-auto border border-[var(--color-accent)] text-[var(--color-accent)] px-5 py-2 rounded hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)] transition-colors font-medium whitespace-nowrap"
     >
       {t(lang, 'portfolio.downloadCv')}

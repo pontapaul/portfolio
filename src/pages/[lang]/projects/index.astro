@@ -14,7 +14,7 @@ const projects = getProjects(lang);
 const featured = projects.filter(p => p.featured);
 const others = projects.filter(p => !p.featured);
 ---
-<BaseLayout title={`${t(lang, 'projects.title')} — Paolo Pontarollo`} lang={lang}>
+<BaseLayout title={`${t(lang, 'projects.title')} — Paolo Pontarollo`} description={t(lang, 'meta.projects.description')} lang={lang}>
   <section class="py-8">
     <h1 class="text-4xl font-bold mb-2">{t(lang, 'projects.title')}</h1>
     <p class="text-muted text-base">{t(lang, 'projects.subtitle')}</p>

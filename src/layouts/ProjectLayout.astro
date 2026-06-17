@@ -17,7 +17,7 @@ interface Props {
 
 const { title, subtitle, tags, coverImage, liveUrl, repoUrl, wip, lang = 'it' } = Astro.props;
 ---
-<BaseLayout title={`${title} — Paolo Pontarollo`} lang={lang}>
+<BaseLayout title={`${title} — Paolo Pontarollo`} description={subtitle} ogType="article" lang={lang}>
   <div class="py-8">
     <a
       href={localePath(lang, '/#progetti')}

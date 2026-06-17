@@ -15,7 +15,7 @@ const { lang } = Astro.params as { lang: Locale };
 const projects = getProjects(lang);
 const featured = projects.filter(p => p.featured);
 ---
-<BaseLayout title="Paolo Pontarollo — Full Stack Developer" lang={lang}>
+<BaseLayout title="Paolo Pontarollo — Full Stack Developer" description={t(lang, 'meta.home.description')} ogType="profile" lang={lang}>
   <HeroSection slot="fullwidth" lang={lang} />
 
   <!-- Narrative intro -->
