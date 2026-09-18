@@ -4,8 +4,8 @@ services:
     container_name: pontapaul-portfolio
     restart: unless-stopped
     networks:
-      - npm-nw
+      - proxy
 
 networks:
-  npm-nw:
+  proxy:
     external: true
